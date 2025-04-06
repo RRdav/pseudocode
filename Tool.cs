@@ -1,4 +1,6 @@
-﻿namespace Assignment1
+﻿using System.ComponentModel.Design;
+
+namespace Assignment1
 {
     public partial class Tool : ITool
     {
@@ -64,28 +66,114 @@
 
         public bool IncreaseQuantity(int num)
         {
-            throw new System.NotImplementedException("Tool.IncreaseQuantity() not implemented");
+            if(num > 0)
+            {
+                mQuantity += num;
+                return true;
+            }
+            return false;
         }
 
         public bool DecreaseQuantity(int num)
         {
-            throw new System.NotImplementedException("Tool.DecreaseQuantity() not implemented");
+            if(num > 0 && num <= AvailableQuantity)
+            {
+                mQuantity -= num;
+                return true;
+            }
+            return false;
         }
 
         public bool AddBorrower(string aBorrower)
         {
-            Console.WriteLine($"Adding borrower: {aBorrower}");
-            throw new System.NotImplementedException("Tool.AddBorrower() not implemented");
+            if(AvailableQuantity > 0 && aBorrower != null && aBorrower != "" && !SearchBorrower(aBorrower)) {
+                int OldAvailableQuantity = AvailableQuantity;
+                string[] oldBorrowers = mBorrowers;
+                string[] newBorrowers = new string[mBorrowers.Length + 1];
+                Console.WriteLine("===============================");
+                Console.WriteLine("Old Borrowers Available QTY: " + AvailableQuantity);
+                Console.WriteLine("===============================");
+                for (int i = 0; i < oldBorrowers.Length; i++)
+                {
+                    newBorrowers[i] = oldBorrowers[i];
+                }
+                newBorrowers[newBorrowers.Length-1] = aBorrower;
+                mBorrowers = newBorrowers;
+                Console.WriteLine("===============================");
+                Console.WriteLine("Borrower added: " + aBorrower);
+                Console.WriteLine("Available Quantity Changed: " + AvailableQuantity);
+                Console.WriteLine("===============================");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool DeleteBorrower(string aBorrower)
         {
-            throw new System.NotImplementedException("Tool.DeleteBorrower() not implemented");
+            if (aBorrower != null && aBorrower != "" && SearchBorrower(aBorrower))
+            {
+                // Find the index of the borrower to be removed
+                int index = -1;
+                for (int i = 0; i < mBorrowers.Length; i++)
+                {
+                    if (mBorrowers[i] == aBorrower)
+                    {
+                        index = i;
+                        Console.WriteLine($"Found Borrower to delete : {mBorrowers[i]}");
+                        break;
+                    }
+                }
+
+                // If the borrower is found, remove them from the array
+                if (index != -1)
+                {
+                    string[] newBorrowers = new string[mBorrowers.Length - 1];
+
+                    // Copy the elements before the index
+                    for (int i = 0; i < index; i++)
+                    {
+                        newBorrowers[i] = mBorrowers[i];
+                    }
+
+                    // Copy the elements after the index
+                    for (int i = index; i < newBorrowers.Length; i++)
+                    {
+                        newBorrowers[i] = mBorrowers[i + 1];
+                    }
+
+                    mBorrowers = newBorrowers;
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine($"Can't find and delete borrower: {aBorrower}");
+                    return false;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Can't delete anything lol");
+                return false;
+            }
         }
+
+
 
         public bool SearchBorrower(string aBorrower)
         {
-            throw new System.NotImplementedException("Tool.SearchBorrower() not implemented");
+            if (aBorrower != null && aBorrower != "") {
+                for (int i = 0; i < mBorrowers.Length; i++) {
+                    if (mBorrowers[i] == aBorrower)
+                        return true;
+                }
+                return false;
+            }
+            else {
+                return false;
+            }
         }
     }
 }

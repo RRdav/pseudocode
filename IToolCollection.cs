@@ -66,23 +66,19 @@ namespace Assignment1
         //     while (left <= right)
         //         mid <- (left + right) / 2
         //         if (tC[mid].Name == T.Name)
-        //             index <- mid
-        //             break
+        //             for j <- mid to tcLength - 2
+        //                 tC[j] <- tC[j + 1]
+        //             newTC <- new tC[tcLength - 1]
+        //             for k <- 0 to tcLength - 2
+        //                 newTC[k] <- tC[k]
+        //             tC <- newTC
+        //             tcLength <- tcLength - 1
+        //             return true
         //         else if (tC[mid].Name < T.Name)
         //             left <- mid + 1
         //         else
         //             right <- mid - 1
-        //     if (index != -1)
-        //         for j <- index to tcLength - 2
-        //             tC[j] <- tC[j + 1]
-        //         newTC <- new tC[tcLength - 1]
-        //         for k <- 0 to tcLength - 2
-        //             newTC[k] <- tC[k]
-        //         tC <- newTC
-        //         tcLength <- tcLength - 1
-        //         return true
-        //     else
-        //         return false
+        //     return false
         // else
         //     return false
 
@@ -90,20 +86,50 @@ namespace Assignment1
         //Pre-condition: nil
         //Post-condition: return true if this tool is in this tool collection; otherwise, return false. This tool collection remains unchanged.
         bool Search(ITool aTool);
+        //  ALGORITHM Search(T) 
+        //  if (T != null)       
+        //       left <- 0
+        //       right <- tcLength - 1
+        //       while (left <= right)
+        //            mid <- (left + right) / 2
+        //            if (tC[mid].Name == T.Name)
+        //                 return true
+        //            else if (tC[mid].Name < T.Name)
+        //                 left <- mid + 1
+        //            else
+        //              right <- mid - 1
+        //       return false
+        //  else
+        //      return false
 
         //remove all the tools in this tool collection. 
         //Pre-condition: nil
         //Post-condition: New Number = 0
         void Clear();
+        // ALGORITHM Clear()
+        //     tcLength <- 0
+        //     tC <- new tC[0]
+        //     tC.Number <- 0
+        //     return true
 
         //check if this tool collection is empty
         //Pre-condition: nil
         //Post-condition: return true if this tool collection is empty; otherwise, return false. This tool collection remains unchanged. 
         bool IsEmpty();
+        // ALGORITHM IsEmpty()
+        //     if (tcLength == 0)
+        //         return true
+        //     else
+        //         return false
 
         //check if this tool collection is full
         //Pre-condition: nil
         //Post-condition: return true if this tool collection is full; otherwise, return false. This tool collection remains unchanged. 
         bool IsFull();
+        // ALGORITHM IsFull()
+        //     if (tcLength == tcCapacity)
+        //         return true
+        //     else
+        //         return false
     }
 }

@@ -81,10 +81,11 @@ namespace Assignment1
         //                return false
         //      OldAvailableQuantity <- AvailableQuantity
         //      OldBorrowers <- Borrowers
-        //      Borrowers <- new string[OldBorrowers.Length + 1]
+        //      newBorrowers <- new string[OldBorrowers.Length + 1]
         //      for i <- 0 to OldBorrowers.Length - 1
-        //          Borrowers[i] <- OldBorrowers[i]
-        //      Borrowers[OldBorrowers.Length] <- aBorrower
+        //          newBorrowers[i] <- OldBorrowers[i]
+        //      newBorrowers[OldBorrowers.Length-1] <- aBorrower
+        //      Borrowers <- newBorrowers
         //      AvailableQuantity <- OldAvailableQuantity - 1
         //      return true
         //     else
@@ -96,21 +97,24 @@ namespace Assignment1
         //                  otherwise, the borrower list remains unchanged and return false.
         bool DeleteBorrower(string aBorrower);
         // ALGORITHM DeleteBorrower(aBorrower)
-        //     if (aBorrower != null) and (aBorrower != "")
-        //         OldAvailableQuantity <- AvailableQuantity
-        //         OldBorrowers <- Borrowers
-        //         for i <- 0 to OldBorrowers.Length - 1
-        //             if (OldBorrowers[i] == aBorrower)
-        //                 for j <- i to OldBorrowers.Length - 2
-        //                     OldBorrowers[j] <- OldBorrowers[j + 1]
-        //                 Borrowers <- new string[OldBorrowers.Length - 1]
-        //                 for k <- 0 to Borrowers.Length - 1
-        //                     Borrowers[k] <- OldBorrowers[k]
-        //                 AvailableQuantity <- OldAvailableQuantity + 1
-        //                 return true
-        //         return false
+        // if (aBorrower != null) and (aBorrower != "")
+        //     index <- -1
+        //     for i <- 0 to mBorrowers.Length - 1
+        //         if (mBorrowers[i] == aBorrower)
+        //             index <- i
+        //             break
+        //     if (index != -1)
+        //         newBorrowers <- new string[mBorrowers.Length - 1]
+        //         for i <- 0 to index - 1
+        //             newBorrowers[i] <- mBorrowers[i]
+        //         for i <- index to newBorrowers.Length - 1
+        //             newBorrowers[i] <- mBorrowers[i + 1]
+        //         mBorrowers <- newBorrowers
+        //         return true
         //     else
         //         return false
+        // else
+        //     return false
 
 
 
