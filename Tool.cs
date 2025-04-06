@@ -90,19 +90,15 @@ namespace Assignment1
                 int OldAvailableQuantity = AvailableQuantity;
                 string[] oldBorrowers = mBorrowers;
                 string[] newBorrowers = new string[mBorrowers.Length + 1];
-                Console.WriteLine("===============================");
-                Console.WriteLine("Old Borrowers Available QTY: " + AvailableQuantity);
-                Console.WriteLine("===============================");
+
                 for (int i = 0; i < oldBorrowers.Length; i++)
                 {
                     newBorrowers[i] = oldBorrowers[i];
                 }
+
                 newBorrowers[newBorrowers.Length-1] = aBorrower;
                 mBorrowers = newBorrowers;
-                Console.WriteLine("===============================");
-                Console.WriteLine("Borrower added: " + aBorrower);
-                Console.WriteLine("Available Quantity Changed: " + AvailableQuantity);
-                Console.WriteLine("===============================");
+
                 return true;
             }
             else
