@@ -33,7 +33,7 @@ namespace Assignment1
         //     temp <- new tC[length + 1]
         //     for i <- 0 to tclength - 1
         //         temp[i] <- tC[i]
-        //     temp[length] <- T
+        //     temp[length-1] <- T
         //     tC <- temp
         //     for i <- 1 to length
         //         key <- tC[i]

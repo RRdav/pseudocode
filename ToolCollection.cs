@@ -45,32 +45,165 @@ namespace Assignment1
 
         public bool Add(ITool aTool)
         {
-            throw new System.NotImplementedException("ToolCollection.Add() not implemented");
+            if (IsFull())
+            {
+                Console.WriteLine("The tool collection is full.");
+                return false;
+            }
+
+            if (aTool != null && !Search(aTool))
+            {
+                ITool[] newToolCollection = new ITool[mTools.Length + 1];
+                for(int i = 0; i < mTools.Length; i++)
+                {
+                    newToolCollection[i] = mTools[i];
+                }
+                newToolCollection[newToolCollection.Length - 1] = aTool;
+                mTools = newToolCollection;
+
+                for (int i = 1; i < mTools.Length; i++)
+                {
+                    ITool key = mTools[i];
+                    int left = 0;
+                    int right = i - 1;
+                    while (left <= right)
+                    {
+                        int mid = (left + right) / 2;
+                        if (mTools[mid].Name.CompareTo(key.Name) < 0)
+                        {
+                            left = mid + 1;
+                        }
+                        else
+                        {
+                            right = mid - 1;
+                        }
+                    }
+                    for (int j = i - 1; j >= left; j--)
+                    {
+                        mTools[j + 1] = mTools[j];
+                    }
+                    mTools[left] = key;
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void Clear()
         {
-            throw new System.NotImplementedException("ToolCollection.Clear() not implemented");
+            mTools = new ITool[0];
         }
 
         public bool Delete(ITool aTool)
         {
-            throw new System.NotImplementedException("ToolCollection.Delete() not implemented");
+            if(IsEmpty())
+            {
+                Console.WriteLine("The tool collection is empty.");
+                return false;
+            }
+
+            if (aTool != null)
+            {
+                int left = 0;
+                int right = mTools.Length - 1;
+                int index = -1;
+
+                while (left <= right)
+                {
+                    int mid = (left + right) / 2;
+                    if (mTools[mid].Name.CompareTo(aTool.Name) == 0)
+                    {
+                        index = mid;
+                        break;
+                    }
+                    else if (mTools[mid].Name.CompareTo(aTool.Name) < 0)
+                    {
+                        left = mid + 1;
+                    }
+                    else
+                    {
+                        right = mid - 1;
+                    }
+                }
+
+                if (index != -1)
+                {
+                    ITool[] newToolCollection = new ITool[mTools.Length - 1];
+                    for (int i = 0, j = 0; i < mTools.Length; i++)
+                    {
+                        if (i != index)
+                        {
+                            newToolCollection[j++] = mTools[i];
+                        }
+                    }
+                    mTools = newToolCollection;
+                    return true;
+                }
+            }
+            return false;
         }
 
         public bool IsEmpty()
         {
-            throw new System.NotImplementedException("ToolCollection.IsEmpty() not implemented");
+            if(mTools.Length == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool IsFull()
         {
-            throw new System.NotImplementedException("ToolCollection.IsFull() not implemented");
+            if(mTools.Length == mCapacity)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool Search(ITool aTool)
         {
-            throw new System.NotImplementedException("ToolCollection.Search() not implemented");
+            if (IsEmpty())
+            {
+                Console.WriteLine("The tool collection is empty.");
+                return false;
+            }
+            if (aTool != null)
+            {
+                int left = 0;
+                int right = mTools.Length - 1;
+                while (left <= right)
+                {
+                    int mid = (left + right) / 2;
+                    if (mTools[mid].Name.CompareTo(aTool.Name) == 0)
+                    {
+                        return true;
+                    }
+                    else if (mTools[mid].Name.CompareTo(aTool.Name) < 0)
+                    {
+                        left = mid + 1;
+                    }
+                    else
+                    {
+                        right = mid - 1;
+                    }
+                }
+                return false;
+            } 
+            else
+            {
+                return false;
+            }
         }
     }
 }
